@@ -98,12 +98,7 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
 		cell.api = self.api
-
-		//needed for cell image reloading
-		cell.indexPath = indexPath
-		cell.tableView = tableView
-
-		cell.setUserForCell(user: self.listOfUsers[indexPath.row])
+		cell.setUserForCell(user: self.listOfUsers[indexPath.row], userIndex: indexPath.row)
 		return cell
 	}
 

@@ -10,8 +10,6 @@ import UIKit
 class UserTableViewCell: UITableViewCell {
 
 	var api = APIManager()
-	var tableView = UITableView()
-	var indexPath = IndexPath()
 	static let identifier = "userCell"
 	var padding = 10
 	var height = 20
@@ -110,7 +108,7 @@ class UserTableViewCell: UITableViewCell {
 	}
 
 
-	func setUserForCell(user: User)
+	func setUserForCell(user: User, userIndex: Int)
 	{
 		print (user.name.first)
 		self.name.text = "\(user.name.first) \(user.name.last)"
@@ -128,12 +126,12 @@ class UserTableViewCell: UITableViewCell {
 		self.flagImage.isHidden = false
 		self.flagImage.image = flag
 
-		self.getUserImage(user: user)
+		self.getUserImage(user: user, userIndex: userIndex)
 
 	}
 
 
-	func getUserImage (user: User)
+	func getUserImage (user: User, userIndex: Int)
 	{
 
 		self.api.getUserImage(imageUrl: user.picture.thumbnail) { (data) in
@@ -145,13 +143,9 @@ class UserTableViewCell: UITableViewCell {
 					print ("No image for display")
 					return
 				}
-				self.userImage.image = UIImage(data: imgData)
-				
-//				trying to reload image in cell
-//				DispatchQueue.main.async {
-//					//self.tableView.reloadData()
-//					//self.tableView.reloadRows(at: [self.indexPath], with: .none)
-//				}
+				DispatchQueue.main.async {
+					self.userImage.image = UIImage(data: imgData)
+				}
 
 				print ("image displayed")
 			case .failure(let error):

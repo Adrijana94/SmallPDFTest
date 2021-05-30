@@ -18,7 +18,6 @@ class APIManager
 		if pagination
 		{
 			self.page += 1
-		//	isPaginating = true
 		}
 		let endpoint = "https://randomuser.me/api?page=\(self.page)&results=20"
 		guard let url = URL(string: endpoint) else {
