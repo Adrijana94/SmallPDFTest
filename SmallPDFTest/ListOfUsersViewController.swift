@@ -23,9 +23,9 @@ class ListOfUsersViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.addSubview(tableView)
+		self.setViews()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		self.setViews()
 		print ("viewDidLoad")
 	}
 
@@ -41,20 +41,27 @@ class ListOfUsersViewController: UIViewController {
 
 	override func viewDidLayoutSubviews() {
 
-		print ("didlayout")
-		api.getUsersList(pagination: false) { [weak self] (result) in
+		self.getUsers(pagination: false)
+	}
+
+	func getUsers (pagination: Bool)
+	{
+		self.startSpinner()
+		api.getUsersList(pagination: pagination) { [weak self] (result) in
 			switch result{
-			case.success(let users):
-				self?.listOfUsers = users.users
+			case.success(let response):
+				self?.listOfUsers.append(contentsOf: response.users)
 				DispatchQueue.main.async {
 					self?.tableView.reloadData()
 				}
+				self?.stopSpinner()
 			case .failure(let error):
 				print (error.localizedDescription)
 				return
 			}
 		}
 	}
+
 
 	func startSpinner()
 	{
@@ -89,14 +96,20 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = self.tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
+		cell.api = self.api
+
+		//needed for cell image reloading
+		cell.indexPath = indexPath
+		cell.tableView = tableView
+
 		cell.setUserForCell(user: self.listOfUsers[indexPath.row])
 		return cell
 	}
 
 
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 100
+		return 150
 	}
 
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -119,29 +132,8 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 		let position = scrollView.contentOffset.y
 		if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height)
 		{
-			guard !api.isPaginating else
-			{
-				return
-			}
-
-			self.startSpinner()
-
-			api.getUsersList(pagination: true) { [weak self] (result) in
-				DispatchQueue.main.async {
-					self?.stopSpinner()
-				}
-				switch result{
-				   case.success(let users):
-					   self?.listOfUsers.append(contentsOf: users.users)
-					   DispatchQueue.main.async {
-						   self?.tableView.reloadData()
-					   }
-				   case .failure(let error):
-					   print (error.localizedDescription)
-					   return
-				}
-		   }
-	   }
+			self.getUsers(pagination: true)
+		}
 
 	}
 }

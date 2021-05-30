@@ -9,6 +9,9 @@ import UIKit
 
 class UserTableViewCell: UITableViewCell {
 
+	var api = APIManager()
+	var tableView = UITableView()
+	var indexPath = IndexPath()
 	static let identifier = "userCell"
 	var padding = 10
 	var height = 20
@@ -82,6 +85,7 @@ class UserTableViewCell: UITableViewCell {
 			make.height.equalTo(height)
 		}
 
+
 		self.age.snp.makeConstraints { (make) in
 			make.top.equalTo(self.name.snp.bottom).offset(padding)
 			make.leading.equalTo(self.userImage.snp.trailing).offset(20)
@@ -123,36 +127,40 @@ class UserTableViewCell: UITableViewCell {
 		self.nationality.isHidden = true
 		self.flagImage.isHidden = false
 		self.flagImage.image = flag
-		//getUserImage(user: user)
 
+		self.getUserImage(user: user)
+
+	}
+
+
+	func getUserImage (user: User)
+	{
+
+		self.api.getUserImage(imageUrl: user.picture.thumbnail) { (data) in
+			switch data{
+			case .success(let imageData):
+				user.imageData = imageData
+
+				guard let imgData = user.imageData else {
+					print ("No image for display")
+					return
+				}
+				self.userImage.image = UIImage(data: imgData)
+				
+//				trying to reload image in cell
+//				DispatchQueue.main.async {
+//					//self.tableView.reloadData()
+//					//self.tableView.reloadRows(at: [self.indexPath], with: .none)
+//				}
+
+				print ("image displayed")
+			case .failure(let error):
+
+				print ("No image data")
+				return
+			}
+		}
 	}
 
 }
 
-
-//extension UIImageView{
-//
-//	func loadImage(urlString: String)
-//	{
-//		guard let url = URL(string: urlString) else {
-//			print ("No image url")
-//			return
-//		}
-//
-//		URLSession.shared.dataTask(with: url) { (data, response, error ) in
-//			if error != nil
-//			{
-//				print ("Error while loading image")
-//			}
-//
-//			guard let data = data else {return}
-//
-//			DispatchQueue.main.async {
-//				self.image = UIImage(data: data)
-//			}
-//
-//		}.resume()
-//
-//	}
-//
-//}

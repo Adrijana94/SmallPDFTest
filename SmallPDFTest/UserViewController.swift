@@ -52,15 +52,23 @@ class UserViewController: UIViewController, MFMailComposeViewControllerDelegate 
 		email.isUserInteractionEnabled = true
 		let tapEmail = UITapGestureRecognizer(target: self, action: #selector(UserViewController.openEmail))
 		email.addGestureRecognizer(tapEmail)
-		// Do any additional setup after loading the view.
 	}
 
 
 	func addUI ()
 	{
+
+		self.view.addSubview(userImage)
+		userImage.snp.makeConstraints { (make) in
+			make.top.equalToSuperview().offset(150)
+			make.centerX.equalToSuperview()
+			make.height.equalTo(100)
+			make.width.equalTo(100)
+		}
+
 		self.view.addSubview(name)
 		name.snp.makeConstraints { (make) in
-			make.top.equalToSuperview().offset(110)
+			make.top.equalTo(userImage.snp.bottom).offset(10)
 			make.trailing.equalToSuperview()
 			make.leading.equalToSuperview()
 			make.height.equalTo(30)
@@ -81,13 +89,6 @@ class UserViewController: UIViewController, MFMailComposeViewControllerDelegate 
 			make.leading.equalToSuperview()
 			make.height.equalTo(30)
 		}
-
-		self.view.addSubview(userImage)
-		userImage.snp.makeConstraints { (make) in
-			make.top.equalTo(email.snp.bottom).offset(10)
-			make.centerX.equalToSuperview()
-			make.height.equalTo(50)
-		}
 	}
 
 
@@ -99,15 +100,15 @@ class UserViewController: UIViewController, MFMailComposeViewControllerDelegate 
 	{
 		name.text = "\(user.name.first) \(user.name.last)"
 		age.text =	"\(user.dob.age)"
-
-//		guard let imageData = self.user.imageData else {
-//			print ("No image data for user")
-//			return
-//		}
-//
-//		userImage.image = UIImage(data: imageData)
 		email.text = "\(user.email)"
 		print ("show data")
+
+		guard let imageData = self.user.imageData else {
+			print ("No image data for user")
+			return
+		}
+
+		userImage.image = UIImage(data: imageData)
 	}
 
 	@objc func openEmail (sender:UITapGestureRecognizer)
@@ -117,7 +118,6 @@ class UserViewController: UIViewController, MFMailComposeViewControllerDelegate 
 			let subject = "Welcome"
 			let body = "This is welcome email :)"
 
-			// Show default mail composer
 			if MFMailComposeViewController.canSendMail() {
 				let mail = MFMailComposeViewController()
 				mail.mailComposeDelegate = self

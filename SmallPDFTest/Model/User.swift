@@ -25,7 +25,6 @@ class User: Decodable {
 	var imageData: Data?
 
 	enum CodingKeys: String, CodingKey {
-			// include only those that you want to decode/encode
 			case gender, name, email, dob, picture, nat
 		}
 
