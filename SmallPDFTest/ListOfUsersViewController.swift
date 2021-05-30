@@ -12,6 +12,7 @@ class ListOfUsersViewController: UIViewController {
 
 	var api = APIManager()
 	var listOfUsers = [User]()
+	let spinner = UIActivityIndicatorView()
 
 	var tableView : UITableView = {
 		var table : UITableView = UITableView()
@@ -22,8 +23,9 @@ class ListOfUsersViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.view.addSubview(tableView)
+		self.tableView.delegate = self
+		self.tableView.dataSource = self
 		self.setViews()
-		self.getUsers(page: "1")
 		print ("viewDidLoad")
 	}
 
@@ -37,18 +39,41 @@ class ListOfUsersViewController: UIViewController {
 		}
 	}
 
-	func getUsers(page: String)
-	{
-		api.getUsersList(page: page){ (users) in
-			print (users.users)
-			self.listOfUsers = users.users
-			print (self.listOfUsers.count)
-			self.tableView.delegate = self
-			self.tableView.dataSource = self
-			self.tableView.reloadData()
+	override func viewDidLayoutSubviews() {
+
+		print ("didlayout")
+		api.getUsersList(pagination: false) { [weak self] (result) in
+			switch result{
+			case.success(let users):
+				self?.listOfUsers = users.users
+				DispatchQueue.main.async {
+					self?.tableView.reloadData()
+				}
+			case .failure(let error):
+				print (error.localizedDescription)
+				return
+			}
 		}
 	}
+
+	func startSpinner()
+	{
+		self.spinner.center = self.view.center
+		self.spinner.color = .red
+		self.view.addSubview(spinner)
+		self.spinner.startAnimating()
+	}
+
+	func stopSpinner()
+	{
+		spinner.stopAnimating()
+		self.view.willRemoveSubview(self.spinner)
+	}
+
+
 }
+
+
 
 
 extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
@@ -77,6 +102,7 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let rootVC = UserViewController(user: self.listOfUsers[indexPath.row])
 		rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(goBack(sender:)))
+		rootVC.navigationItem.title = "\(self.listOfUsers[indexPath.row].name.first)  \(self.listOfUsers[indexPath.row].name.last)"
 		let navVC = UINavigationController(rootViewController: rootVC)
 		navVC.modalPresentationStyle = .fullScreen
 		self.present(navVC, animated: true)
@@ -88,6 +114,35 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 		dismiss(animated: true, completion: nil)
 	}
 
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
+		print ("called")
+		let position = scrollView.contentOffset.y
+		if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height)
+		{
+			guard !api.isPaginating else
+			{
+				return
+			}
 
+			self.startSpinner()
+
+			api.getUsersList(pagination: true) { [weak self] (result) in
+				DispatchQueue.main.async {
+					self?.stopSpinner()
+				}
+				switch result{
+				   case.success(let users):
+					   self?.listOfUsers.append(contentsOf: users.users)
+					   DispatchQueue.main.async {
+						   self?.tableView.reloadData()
+					   }
+				   case .failure(let error):
+					   print (error.localizedDescription)
+					   return
+				}
+		   }
+	   }
+
+	}
 }
 

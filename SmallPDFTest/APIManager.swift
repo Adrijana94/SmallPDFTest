@@ -11,11 +11,17 @@ import Foundation
 class APIManager
 {
 	var url = "https://randomuser.me/api?page=1&results=20"
+	var page = 1
+	var isPaginating : Bool = false
 
-	func getUsersList (page: String, completion : @escaping (Users) -> ())
+	func getUsersList (pagination: Bool, completion : @escaping (Result<Users, Error>) -> ())
 	{
-
-		let endpoint = "https://randomuser.me/api?page=\(page)&results=20"
+		if pagination
+		{
+			self.page += 1
+			isPaginating = true
+		}
+		let endpoint = "https://randomuser.me/api?page=\(self.page)&results=20"
 		guard let url = URL(string: endpoint) else {
 			print ("Invalid URL")
 			return
@@ -32,13 +38,16 @@ class APIManager
 			do{
 				let jsonData = try JSONDecoder().decode(Users.self, from: data)
 
-				DispatchQueue.main.async {
+				DispatchQueue.global().asyncAfter(deadline: .now() + (pagination ? 3 : 1), execute:  {
 					print (jsonData)
-					completion(jsonData)
-				}
+					completion(.success(jsonData))
 
-			}
-			catch let jsonError {
+					if self.isPaginating{
+						self.isPaginating = false
+					}
+				})
+
+			} catch let jsonError {
 				print ("Decoding failed: \(jsonError)")
 			}
 		}.resume()
