@@ -3,26 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5033765826639651002CB57F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033765726639651002CB57F /* AppDelegate.swift */; };
 		5033765A26639651002CB57F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033765926639651002CB57F /* SceneDelegate.swift */; };
-		5033765C26639651002CB57F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033765B26639651002CB57F /* ViewController.swift */; };
+		5033765C26639651002CB57F /* ListOfUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033765B26639651002CB57F /* ListOfUsersViewController.swift */; };
 		5033765F26639651002CB57F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5033765D26639651002CB57F /* Main.storyboard */; };
 		5033766226639651002CB57F /* SmallPDFTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5033766026639651002CB57F /* SmallPDFTest.xcdatamodeld */; };
 		5033766426639653002CB57F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5033766326639653002CB57F /* Assets.xcassets */; };
 		5033766726639653002CB57F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5033766526639653002CB57F /* LaunchScreen.storyboard */; };
 		503376702663966F002CB57F /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033766F2663966F002CB57F /* APIManager.swift */; };
 		5033767226639A38002CB57F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5033767126639A38002CB57F /* User.swift */; };
+		509DD1BA2663A86F009E5043 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DD1B92663A86F009E5043 /* UserTableViewCell.swift */; };
+		509DD1BD2663E28C009E5043 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509DD1BC2663E28C009E5043 /* UserViewController.swift */; };
+		ED7564EC7C8E7FE894968FCD /* Pods_SmallPDFTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8765C16FAC80881215DFBA6D /* Pods_SmallPDFTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0BE9AF04600F24D296F6BA7B /* Pods-SmallPDFTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallPDFTest.release.xcconfig"; path = "Target Support Files/Pods-SmallPDFTest/Pods-SmallPDFTest.release.xcconfig"; sourceTree = "<group>"; };
+		42D605396AC1F00733F7D995 /* Pods-SmallPDFTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmallPDFTest.debug.xcconfig"; path = "Target Support Files/Pods-SmallPDFTest/Pods-SmallPDFTest.debug.xcconfig"; sourceTree = "<group>"; };
 		5033765426639651002CB57F /* SmallPDFTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallPDFTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5033765726639651002CB57F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5033765926639651002CB57F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5033765B26639651002CB57F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5033765B26639651002CB57F /* ListOfUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfUsersViewController.swift; sourceTree = "<group>"; };
 		5033765E26639651002CB57F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5033766126639651002CB57F /* SmallPDFTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SmallPDFTest.xcdatamodel; sourceTree = "<group>"; };
 		5033766326639653002CB57F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -30,6 +35,9 @@
 		5033766826639653002CB57F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5033766F2663966F002CB57F /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5033767126639A38002CB57F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		509DD1B92663A86F009E5043 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		509DD1BC2663E28C009E5043 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8765C16FAC80881215DFBA6D /* Pods_SmallPDFTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmallPDFTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +45,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7564EC7C8E7FE894968FCD /* Pods_SmallPDFTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0471D7C161668E0EBB9C35B4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8765C16FAC80881215DFBA6D /* Pods_SmallPDFTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5033764B26639651002CB57F = {
 			isa = PBXGroup;
 			children = (
 				5033765626639651002CB57F /* SmallPDFTest */,
 				5033765526639651002CB57F /* Products */,
+				5ABAA405E9CEFE3338241401 /* Pods */,
+				0471D7C161668E0EBB9C35B4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,11 +81,11 @@
 		5033765626639651002CB57F /* SmallPDFTest */ = {
 			isa = PBXGroup;
 			children = (
+				509DD1BB2663A883009E5043 /* ViewController */,
 				5033767326639A3E002CB57F /* Model */,
 				5033766E2663965C002CB57F /* API */,
 				5033765726639651002CB57F /* AppDelegate.swift */,
 				5033765926639651002CB57F /* SceneDelegate.swift */,
-				5033765B26639651002CB57F /* ViewController.swift */,
 				5033765D26639651002CB57F /* Main.storyboard */,
 				5033766326639653002CB57F /* Assets.xcassets */,
 				5033766526639653002CB57F /* LaunchScreen.storyboard */,
@@ -88,8 +107,27 @@
 			isa = PBXGroup;
 			children = (
 				5033767126639A38002CB57F /* User.swift */,
+				509DD1B92663A86F009E5043 /* UserTableViewCell.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		509DD1BB2663A883009E5043 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5033765B26639651002CB57F /* ListOfUsersViewController.swift */,
+				509DD1BC2663E28C009E5043 /* UserViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		5ABAA405E9CEFE3338241401 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				42D605396AC1F00733F7D995 /* Pods-SmallPDFTest.debug.xcconfig */,
+				0BE9AF04600F24D296F6BA7B /* Pods-SmallPDFTest.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,9 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5033766B26639653002CB57F /* Build configuration list for PBXNativeTarget "SmallPDFTest" */;
 			buildPhases = (
+				463B7E420120EE59C7AE5AAA /* [CP] Check Pods Manifest.lock */,
 				5033765026639651002CB57F /* Sources */,
 				5033765126639651002CB57F /* Frameworks */,
 				5033765226639651002CB57F /* Resources */,
+				AE1358A6FFF28ED0341C4E22 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,13 +197,57 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		463B7E420120EE59C7AE5AAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SmallPDFTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE1358A6FFF28ED0341C4E22 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmallPDFTest/Pods-SmallPDFTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SmallPDFTest/Pods-SmallPDFTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SmallPDFTest/Pods-SmallPDFTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5033765026639651002CB57F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				5033766226639651002CB57F /* SmallPDFTest.xcdatamodeld in Sources */,
-				5033765C26639651002CB57F /* ViewController.swift in Sources */,
+				509DD1BD2663E28C009E5043 /* UserViewController.swift in Sources */,
+				5033765C26639651002CB57F /* ListOfUsersViewController.swift in Sources */,
+				509DD1BA2663A86F009E5043 /* UserTableViewCell.swift in Sources */,
 				5033767226639A38002CB57F /* User.swift in Sources */,
 				503376702663966F002CB57F /* APIManager.swift in Sources */,
 				5033765826639651002CB57F /* AppDelegate.swift in Sources */,
@@ -311,6 +395,7 @@
 		};
 		5033766C26639653002CB57F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 42D605396AC1F00733F7D995 /* Pods-SmallPDFTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -330,6 +415,7 @@
 		};
 		5033766D26639653002CB57F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0BE9AF04600F24D296F6BA7B /* Pods-SmallPDFTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
