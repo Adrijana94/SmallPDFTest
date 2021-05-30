@@ -11,10 +11,18 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+	var window: UIWindow?
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+
+		window = UIWindow(frame: UIScreen.main.bounds)
+		let mainView = ListOfUsersViewController()
+		let navController = UINavigationController()
+		self.window!.rootViewController = mainView
+		navController.popToRootViewController(animated: true)
+		self.window?.makeKeyAndVisible()
+
 		return true
 	}
 

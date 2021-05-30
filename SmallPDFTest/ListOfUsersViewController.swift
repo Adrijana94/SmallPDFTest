@@ -74,5 +74,20 @@ extension ListOfUsersViewController : UITableViewDataSource, UITableViewDelegate
 		return 100
 	}
 
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let rootVC = UserViewController(user: self.listOfUsers[indexPath.row])
+		rootVC.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(goBack(sender:)))
+		let navVC = UINavigationController(rootViewController: rootVC)
+		navVC.modalPresentationStyle = .fullScreen
+		self.present(navVC, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
+
+	}
+
+	@objc func goBack(sender: UIBarButtonItem){
+		dismiss(animated: true, completion: nil)
+	}
+
+
 }
 
