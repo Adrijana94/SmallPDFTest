@@ -45,7 +45,7 @@ class UserViewController: UIViewController, MFMailComposeViewControllerDelegate 
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.view.backgroundColor = .red
+		self.view.backgroundColor = .yellow
 		self.navigationItem.setHidesBackButton(false, animated:false)
 		addUI()
 

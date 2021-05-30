@@ -39,6 +39,15 @@ class UserTableViewCell: UITableViewCell {
 	}()
 
 
+	var flagImage: UIImageView = {
+		let image = UIImageView()
+		image.sizeToFit()
+		image.contentMode = .scaleAspectFit
+		image.isHidden = true
+		return image
+   }()
+
+
 
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -46,6 +55,7 @@ class UserTableViewCell: UITableViewCell {
 		self.addSubview(age)
 		self.addSubview(userImage)
 		self.addSubview(nationality)
+		self.addSubview(flagImage)
 
 		addUI()
 	}
@@ -79,13 +89,19 @@ class UserTableViewCell: UITableViewCell {
 			make.height.equalTo(height)
 		}
 
-
-
 		self.nationality.snp.makeConstraints { (make) in
 			make.top.equalTo(self.age.snp.bottom).offset(padding)
 			make.leading.equalTo(self.userImage.snp.trailing).offset(20)
 			make.trailing.equalToSuperview()
 			make.height.equalTo(height)
+		}
+
+
+		self.flagImage.snp.makeConstraints { (make) in
+			make.top.equalTo(self.age.snp.bottom).offset(padding)
+			make.leading.equalTo(self.userImage.snp.trailing).offset(20)
+			make.width.equalTo(30)
+			make.height.equalTo(30)
 		}
 	}
 
@@ -97,15 +113,19 @@ class UserTableViewCell: UITableViewCell {
 		self.age.text = String (user.dob.age)
 		self.nationality.text = user.nat
 
-//		getUserImage(user: user)
+		guard let flag = UIImage(named: "\(user.nat).png") else
+		{
+			self.nationality.isHidden = false
+			self.flagImage.isHidden = true
+			return
+		}
+
+		self.nationality.isHidden = true
+		self.flagImage.isHidden = false
+		self.flagImage.image = flag
+		//getUserImage(user: user)
 
 	}
-
-//	func getUserImage(user : User)
-//	{
-//		self.imageView?.loadImage(urlString: user.picture.thumbnail)
-//
-//	}
 
 }
 
